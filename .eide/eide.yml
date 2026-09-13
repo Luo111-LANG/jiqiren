@@ -127,8 +127,8 @@ targets:
             - id: 1
               isChecked: true
               mem:
-                size: "0x10000"
-                startAddr: "0x20000000"
+                size: ""
+                startAddr: ""
               noInit: false
               tag: IRAM
             - id: 2
@@ -164,11 +164,11 @@ targets:
               isChecked: true
               isStartup: true
               mem:
-                size: "0x40000"
-                startAddr: "0x08000000"
+                size: ""
+                startAddr: ""
               tag: IROM
             - id: 2
-              isChecked: false
+              isChecked: true
               isStartup: false
               mem:
                 size: "0x0"
@@ -186,7 +186,7 @@ targets:
         proType: 1
         speed: 8000
       STLink:
-        address: "0x08000000"
+        address: ""
         bin: ""
         elFile: None
         optionBytes: .eide/jiqiren.st.option.bytes.ini
