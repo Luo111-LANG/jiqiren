@@ -24,7 +24,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "Encoder.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -145,7 +145,12 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-
+  Encoder_Init();
+  HAL_TIM_Base_Start_IT(&htim9);
+  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
+  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
+  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -227,7 +232,115 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{ 
+	if (htim->Instance == TIM1)  
+    {
+		static uint16_t CountA;
+		static uint16_t CountB;
+    static uint16_t CountC;
+		static uint16_t CountD;
+		CountA ++;
+		CountB ++;
+		CountC ++;
+		CountD ++;
+		if (CountA >= 20)
+		{
+			CountA = 0;
+			ActualA = Encoder_GetA();
+			Error1A = Error0A;
+			Error0A = TargetA - ActualA;
+			OutA = Kp*Error0A + ErrorIntA +Kd*(Error0A - Error1A);
+			if(OutA > 100)
+			{
+				OutA = 100;							// 输出饱和，本周期不积分（抗积分饱和）
+			}
+			else if(OutA < -100)
+			{
+				OutA = -100;
+			}
+			else
+			{
+				ErrorIntA += Ki*Error0A;			// 只在未饱和时累加积分
+			}
+			if(ErrorIntA > 60) ErrorIntA = 60;		// 积分项限幅
+			if(ErrorIntA < -60) ErrorIntA = -60;
+			SetPWMA(OutA);
+		}
 
+		if (CountB >= 20)
+		{
+			CountB = 0;
+			ActualB = Encoder_GetB();
+			Error1B = Error0B;
+			Error0B = TargetB - ActualB;
+			OutB = Kp*Error0B + ErrorIntB +Kd*(Error0B - Error1B);
+			if(OutB > 100)
+			{
+				OutB = 100;							// 输出饱和，本周期不积分（抗积分饱和）
+			}
+			else if(OutB < -100)
+			{
+				OutB = -100;
+			}
+			else
+			{
+				ErrorIntB += Ki*Error0B;			// 只在未饱和时累加积分
+			}
+			if(ErrorIntB > 60) ErrorIntB = 60;		// 积分项限幅
+			if(ErrorIntB < -60) ErrorIntB = -60;
+			SetPWMB(OutB);
+		}
+
+    if (CountC >= 20)
+		{
+			CountC = 0;
+			ActualC = Encoder_GetC();
+			Error1C = Error0C;
+			Error0C = TargetC - ActualC;
+			OutC = Kp*Error0C + ErrorIntC +Kd*(Error0C - Error1C);
+			if(OutC > 100)
+			{
+				OutC = 100;							// 输出饱和，本周期不积分（抗积分饱和）
+			}
+			else if(OutC < -100)
+			{
+				OutC = -100;
+			}
+			else
+			{
+				ErrorIntC += Ki*Error0C;			// 只在未饱和时累加积分
+			}
+			if(ErrorIntC > 60) ErrorIntC = 60;		// 积分项限幅
+			if(ErrorIntC < -60) ErrorIntC = -60;
+			SetPWMC(OutC);
+		}
+
+		if (CountD >= 20)
+		{
+			CountD = 0;
+			ActualD = Encoder_GetD();
+			Error1D = Error0D;
+			Error0D = TargetD - ActualD;
+			OutD = Kp*Error0D + ErrorIntD +Kd*(Error0D - Error1D);
+			if(OutD > 100)
+			{
+				OutD = 100;							// 输出饱和，本周期不积分（抗积分饱和）
+			}
+			else if(OutD < -100)
+			{
+				OutD = -100;
+			}
+			else
+			{
+				ErrorIntD += Ki*Error0D;			// 只在未饱和时累加积分
+			}
+			if(ErrorIntD > 60) ErrorIntD = 60;		// 积分项限幅
+			if(ErrorIntD < -60) ErrorIntD = -60;
+			SetPWMD(OutD);
+		}
+	}
+}
 /* USER CODE END 4 */
 
 /**
