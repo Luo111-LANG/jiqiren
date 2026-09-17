@@ -284,6 +284,54 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		}
 	}
 }
+
+HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+    if (huart->Instance == USART2)
+    {
+        HAL_UART_Receive_IT(&huart2, &rx_data, 1);
+        if (rx_data == 'w')
+        {
+            vx = 0.5;
+            vy = 0;
+            omega = 0;
+        }
+        else if (rx_data == 's')
+        {
+            vx = -0.5;
+            vy = 0;
+            omega = 0;
+        }
+        else if (rx_data == 'a')
+        {
+            vx = 0;
+            vy = -0.5;
+            omega = 0;
+        }
+        else if (rx_data == 'd')
+        {
+            vx = 0;
+            vy = 0.5;
+            omega = 0;
+        }
+        else if (rx_data == 'q')
+        {
+            vx = 0;
+            vy = 0;
+            omega = -1.57; // Rotate left
+        }
+        else if (rx_data == 'e')
+        {
+            vx = 0;
+            vy = 0;
+            omega = 1.57; // Rotate right
+        }
+        else if (rx_data == 'x')
+        {
+            vx = 0;
+            vy = 0;
+            omega = 0; // Stop
+        }
 /* USER CODE END 4 */
 
 /**
