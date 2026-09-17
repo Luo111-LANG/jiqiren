@@ -27,6 +27,8 @@ virtualFolder:
                 - path: Core/Src/tim.c
                 - path: Core/Src/usart.c
                 - path: Core/Src/Encoder.c
+                - path: Core/Src/Pwm.c
+                - path: Core/Src/Car.c
               folders: []
     - name: Drivers
       files: []
