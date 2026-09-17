@@ -66,6 +66,7 @@ float Error0A, Error1A, ErrorIntA;
 float Error0B, Error1B, ErrorIntB;
 float Error0C, Error1C, ErrorIntC;
 float Error0D, Error1D, ErrorIntD;
+float vx,vy,omega;
 /* USER CODE END 0 */
 
 /**
