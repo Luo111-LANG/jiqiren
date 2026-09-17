@@ -24,6 +24,8 @@ virtualFolder:
                 - path: Core/Src/gpio.c
                 - path: Core/Src/stm32f4xx_it.c
                 - path: Core/Src/stm32f4xx_hal_msp.c
+                - path: Core/Src/tim.c
+                - path: Core/Src/usart.c
               folders: []
     - name: Drivers
       files: []
@@ -43,6 +45,9 @@ virtualFolder:
             - path: Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c
             - path: Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c
             - path: Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c
+            - path: Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c
+            - path: Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c
+            - path: Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c
           folders: []
         - name: CMSIS
           files:
