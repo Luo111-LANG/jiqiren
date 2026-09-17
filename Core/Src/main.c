@@ -110,6 +110,7 @@ int main(void)
   MX_TIM9_Init();
   MX_TIM10_Init();
   MX_USART6_UART_Init();
+  MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -174,7 +175,7 @@ void SystemClock_Config(void)
 /* USER CODE BEGIN 4 */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 { 
-	if (htim->Instance == TIM1)  
+	if (htim->Instance == TIM9)  
     {
 		static uint16_t CountA;
 		static uint16_t CountB;
