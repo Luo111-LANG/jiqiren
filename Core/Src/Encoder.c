@@ -3,13 +3,9 @@
 #include "tim.h"
 void Encoder_Init(void)
 {
-	  MX_TIM2_Init();
 	  HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
-	  MX_TIM3_Init();
 	  HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
-	  MX_TIM4_Init();
 	  HAL_TIM_Encoder_Start(&htim4, TIM_CHANNEL_ALL);
-	  MX_TIM5_Init();
 	  HAL_TIM_Encoder_Start(&htim5, TIM_CHANNEL_ALL);
 }
 

@@ -66,7 +66,8 @@ float Error0A, Error1A, ErrorIntA;
 float Error0B, Error1B, ErrorIntB;
 float Error0C, Error1C, ErrorIntC;
 float Error0D, Error1D, ErrorIntD;
-float vx,vy,omega;
+float vx = 0, vy = 0, omega = 0; 
+float Lx = 0.15, Ly = 0.15;  //Lx、Ly 是轮子中心到车体中心在 X、Y 方向的距离
 /* USER CODE END 0 */
 
 /**

@@ -1,7 +1,7 @@
 #ifndef __CAR_H
 #define __CAR_H
 
-void Car_Speed(vx,vy,omega);
+void Car_Speed(float vx, float vy, float omega);
       /*
       *  /    \
       *
