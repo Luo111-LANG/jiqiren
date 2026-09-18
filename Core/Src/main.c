@@ -68,6 +68,7 @@ float Error0C, Error1C, ErrorIntC;
 float Error0D, Error1D, ErrorIntD;
 float vx = 0, vy = 0, omega = 0; 
 float Lx = 0.15, Ly = 0.15;  //Lx、Ly 是轮子中心到车体中心在 X、Y 方向的距离
+uint8_t rx_data;
 /* USER CODE END 0 */
 
 /**
@@ -178,7 +179,7 @@ void SystemClock_Config(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 { 
 	if (htim->Instance == TIM9)  
-    {
+  {
 		static uint16_t CountA;
 		static uint16_t CountB;
     static uint16_t CountC;
@@ -285,7 +286,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	}
 }
 
-HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
     if (huart->Instance == USART2)
     {
@@ -332,6 +333,8 @@ HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
             vy = 0;
             omega = 0; // Stop
         }
+    }
+}
 /* USER CODE END 4 */
 
 /**
