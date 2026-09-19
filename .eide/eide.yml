@@ -29,6 +29,7 @@ virtualFolder:
                 - path: Core/Src/Encoder.c
                 - path: Core/Src/Pwm.c
                 - path: Core/Src/Car.c
+                - path: Core/Src/Trace.c
               folders: []
     - name: Drivers
       files: []

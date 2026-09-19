@@ -26,6 +26,7 @@
 /* USER CODE BEGIN Includes */
 #include "Encoder.h"
 #include "Pwm.h"
+#include "Trace.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -125,6 +126,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+      Trace();          // 解析一帧八路探头 -> 算偏差 -> 驱动底盘
     }
   /* USER CODE END 3 */
 }
@@ -290,7 +292,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
     if (huart->Instance == USART2)
     {
-        HAL_UART_Receive_IT(&huart2, &rx_data, 43);
+        HAL_UART_Receive_IT(&huart2, (uint8_t *)rx_data, 43);
     }
 }
 /* USER CODE END 4 */
