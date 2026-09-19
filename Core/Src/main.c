@@ -66,9 +66,9 @@ float Error0A, Error1A, ErrorIntA;
 float Error0B, Error1B, ErrorIntB;
 float Error0C, Error1C, ErrorIntC;
 float Error0D, Error1D, ErrorIntD;
-float vx = 0, vy = 0, omega = 0; 
+volatile float vx = 0, vy = 0, omega = 0; 
 float Lx = 0.15, Ly = 0.15;  //Lx、Ly 是轮子中心到车体中心在 X、Y 方向的距离
-uint8_t rx_data;
+char rx_data[43];
 /* USER CODE END 0 */
 
 /**
@@ -290,49 +290,7 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
     if (huart->Instance == USART2)
     {
-        HAL_UART_Receive_IT(&huart2, &rx_data, 1);
-        if (rx_data == 'w')
-        {
-            vx = 0.5;
-            vy = 0;
-            omega = 0;
-        }
-        else if (rx_data == 's')
-        {
-            vx = -0.5;
-            vy = 0;
-            omega = 0;
-        }
-        else if (rx_data == 'a')
-        {
-            vx = 0;
-            vy = -0.5;
-            omega = 0;
-        }
-        else if (rx_data == 'd')
-        {
-            vx = 0;
-            vy = 0.5;
-            omega = 0;
-        }
-        else if (rx_data == 'q')
-        {
-            vx = 0;
-            vy = 0;
-            omega = -1.57; // Rotate left
-        }
-        else if (rx_data == 'e')
-        {
-            vx = 0;
-            vy = 0;
-            omega = 1.57; // Rotate right
-        }
-        else if (rx_data == 'x')
-        {
-            vx = 0;
-            vy = 0;
-            omega = 0; // Stop
-        }
+        HAL_UART_Receive_IT(&huart2, &rx_data, 43);
     }
 }
 /* USER CODE END 4 */
